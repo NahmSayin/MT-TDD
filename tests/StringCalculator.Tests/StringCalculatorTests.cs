@@ -17,4 +17,12 @@ public class StringCalculatorTests
 
         Assert.Equal(1, result);
     }
+
+    [Fact]
+    public void Add_With2_Returns2()
+    {
+        var result = StringCalculator.Add("2");
+
+        Assert.Equal(2, result);
+    }
 }
