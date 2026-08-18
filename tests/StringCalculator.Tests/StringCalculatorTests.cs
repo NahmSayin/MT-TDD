@@ -41,4 +41,12 @@ public class StringCalculatorTests
 
         Assert.Equal(5, result);
     }
+
+    [Fact]
+    public void Add_With5and2_Returns7()
+    {
+        var result = StringCalculator.Add("5,2");
+
+        Assert.Equal(7, result);
+    }
 }
