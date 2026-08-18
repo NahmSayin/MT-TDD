@@ -4,6 +4,11 @@ public static class StringCalculator
 {
     public static int Add(string input)
     {
-        return 0;
+        if (input == "")
+        {
+            return 0;
+        }
+
+        return 1;
     }
 }
