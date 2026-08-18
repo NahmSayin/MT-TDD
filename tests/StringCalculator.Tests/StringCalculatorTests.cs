@@ -37,7 +37,7 @@ public class StringCalculatorTests
     [Fact]
     public void Add_With2and3_Returns5()
     {
-        var result = StringCalculator.Add("2,5");
+        var result = StringCalculator.Add("2,3");
 
         Assert.Equal(5, result);
     }
