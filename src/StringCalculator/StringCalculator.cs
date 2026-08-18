@@ -8,13 +8,7 @@ public static class StringCalculator
         {
             return 0;
         }
-        
-        if (input.Contains(','))
-        {
-            float[] splitInput = input.Split(',').Select(float.Parse).ToArray();
-            return splitInput[0] + splitInput[1];
-        }
-        
-        return float.Parse(input);
+        float[] splitInput = input.Split(',').Select(float.Parse).ToArray();
+        return splitInput.Sum();
     }
 }
