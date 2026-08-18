@@ -2,13 +2,13 @@ namespace StringCalculator;
 
 public static class StringCalculator
 {
-    public static int Add(string input)
+    public static float Add(string input)
     {
         if (input == "")
         {
             return 0;
         }
 
-        return 1;
+        return float.Parse(input);
     }
 }

@@ -25,4 +25,12 @@ public class StringCalculatorTests
 
         Assert.Equal(2, result);
     }
+
+    [Fact]
+    public void Add_With2point5_Returns2point5()
+    {
+        var result = StringCalculator.Add("2.5");
+
+        Assert.Equal(2.5, result);
+    }
 }
