@@ -11,7 +11,7 @@ public static class StringCalculator
 
         return input
             .Split(',')
-            .Select(float.Parse)
+            .Select(decimal.Parse)
             .ToArray()
             .Sum()
             .ToString();
