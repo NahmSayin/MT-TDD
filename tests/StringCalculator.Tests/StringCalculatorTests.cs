@@ -18,12 +18,19 @@ public class StringCalculatorTests
     [InlineData("5,2", "7")]
     [InlineData("4,5,2", "11")]
     [InlineData("1.1,2.2", "3.3")]
-    [InlineData("1.1\n2.2", "3.3")]
     public void Add_WithCommaSeparatedNumbers_ReturnsSumOfNumbers(string input, string expected)
     {
         var result = StringCalculator.Add(input);
 
         Assert.Equal(expected, result);
+    }
+    
+    [Fact]
+    public void Add_WithLineSeparatedNumbers_ReturnsSumOfNumbers()
+    {
+        var result = StringCalculator.Add("2.2\n4.4");
+
+        Assert.Equal("6.6", result);
     }
 }
 
