@@ -7,16 +7,17 @@ public class StringCalculatorTests
     {
         var result = StringCalculator.Add("");
 
-        Assert.Equal(0, result);
+        Assert.Equal("0", result);
     }
+    
     [Theory]
-    [InlineData("1", 1)]
-    [InlineData("2", 2)]
-    [InlineData("2.5", 2.5)]
-    [InlineData("2,3", 5)]
-    [InlineData("5,2", 7)]
-    [InlineData("4,5,2", 11)]
-    public void Add_WithCommaSeparatedNumbers_ReturnsSumOfNumbers(string input, float expected)
+    [InlineData("1", "1")]
+    [InlineData("2", "2")]
+    [InlineData("2.5", "2.5")]
+    [InlineData("2,3", "5")]
+    [InlineData("5,2", "7")]
+    [InlineData("4,5,2", "11")]
+    public void Add_WithCommaSeparatedNumbers_ReturnsSumOfNumbers(string input, string expected)
     {
         var result = StringCalculator.Add(input);
 
