@@ -17,6 +17,7 @@ public class StringCalculatorTests
     [InlineData("2,3", "5")]
     [InlineData("5,2", "7")]
     [InlineData("4,5,2", "11")]
+    [InlineData("1.1,2.2", "3.3")]
     public void Add_WithCommaSeparatedNumbers_ReturnsSumOfNumbers(string input, string expected)
     {
         var result = StringCalculator.Add(input);
