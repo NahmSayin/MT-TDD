@@ -32,6 +32,14 @@ public class StringCalculatorTests
 
         Assert.Equal("6.6", result);
     }
+    
+    [Fact]
+    public void Add_WithLineAndCommaSeparatedNumbers_ReturnsSumOfNumbers()
+    {
+        var result = StringCalculator.Add("1\n2,3");
+
+        Assert.Equal("6", result);
+    }
 }
 
 // implement unit test theory https://pgpott.medium.com/theory-vs-fact-attribute-c-xunit-testing-9cd3c6bae76f
