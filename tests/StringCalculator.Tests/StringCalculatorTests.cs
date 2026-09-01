@@ -40,6 +40,16 @@ public class StringCalculatorTests
 
         Assert.Equal("6", result);
     }
+
+    [Fact]
+    public void Add_DoesntAllowTheInputToEndInASeparator()
+    {
+        var result = StringCalculator.Add("1,3,");
+
+        Assert.Equal("Number expected but EOF found", result);
+    }
 }
+
+
 
 // implement unit test theory https://pgpott.medium.com/theory-vs-fact-attribute-c-xunit-testing-9cd3c6bae76f
