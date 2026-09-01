@@ -9,53 +9,18 @@ public class StringCalculatorTests
 
         Assert.Equal(0, result);
     }
-    
-    [Fact]
-    public void Add_With1_Returns1()
+    [Theory]
+    [InlineData("1", 1)]
+    [InlineData("2", 2)]
+    [InlineData("2.5", 2.5)]
+    [InlineData("2,3", 5)]
+    [InlineData("5,2", 7)]
+    [InlineData("4,5,2", 11)]
+    public void Add_WithCommaSeparatedNumbers_ReturnsSumOfNumbers(string input, float expected)
     {
-        var result = StringCalculator.Add("1");
+        var result = StringCalculator.Add(input);
 
-        Assert.Equal(1, result);
-    }
-
-    [Fact]
-    public void Add_With2_Returns2()
-    {
-        var result = StringCalculator.Add("2");
-
-        Assert.Equal(2, result);
-    }
-
-    [Fact]
-    public void Add_With2point5_Returns2point5()
-    {
-        var result = StringCalculator.Add("2.5");
-
-        Assert.Equal(2.5, result);
-    }
-
-    [Fact]
-    public void Add_With2and3_Returns5()
-    {
-        var result = StringCalculator.Add("2,3");
-
-        Assert.Equal(5, result);
-    }
-
-    [Fact]
-    public void Add_With5and2_Returns7()
-    {
-        var result = StringCalculator.Add("5,2");
-
-        Assert.Equal(7, result);
-    }
-
-    [Fact]
-    public void Add_With4and5and2_Returns11()
-    {
-        var result = StringCalculator.Add("4,5,2");
-
-        Assert.Equal(11, result);
+        Assert.Equal(expected, result);
     }
 }
 
