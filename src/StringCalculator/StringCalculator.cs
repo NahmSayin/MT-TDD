@@ -10,7 +10,7 @@ public static class StringCalculator
         }
 
         return input
-            .Split(input.Contains("\n") ? "\n" : ",")
+            .Split('\n', ',')
             .Select(decimal.Parse)
             .ToArray()
             .Sum()
