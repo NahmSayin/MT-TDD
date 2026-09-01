@@ -9,12 +9,8 @@ public static class StringCalculator
             return "0";
         }
 
-        string separator = ",";
-        if (input.Contains("\n")) {
-            separator = "\n";
-        }
         return input
-            .Split(separator)
+            .Split(input.Contains("\n") ? "\n" : ",")
             .Select(decimal.Parse)
             .ToArray()
             .Sum()
