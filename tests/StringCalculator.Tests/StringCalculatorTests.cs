@@ -48,6 +48,17 @@ public class StringCalculatorTests
 
         Assert.Equal("Number expected but EOF found", result);
     }
+    
+    [Theory]
+    [InlineData("//;\n1;2", "3")]
+    [InlineData("//|\n1|2|3", "6")]
+    [InlineData("//sep\n2sep3", "5")]
+    public void Add_WithCustomSeparator_ReturnsSumOfNumbers(string input, string expected)
+    {
+        var result = StringCalculator.Add(input);
+
+        Assert.Equal(expected, result);
+    }
 }
 
 
