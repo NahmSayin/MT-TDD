@@ -14,19 +14,17 @@ public static class StringCalculator
             return "Number expected but EOF found";
         }
 
+        string[] separators = ["\n", ","];
+        
         if (input.StartsWith("//"))
         {
             string[] inputParts = input.Substring(2).Split('\n');
-            string seperator = inputParts[0];
-            return inputParts[1].Split(seperator)
-                .Select(decimal.Parse)
-                .ToArray()
-                .Sum()
-                .ToString();
+            separators = [inputParts[0]];
+            input = inputParts[1];
         }
 
         return input
-            .Split('\n', ',')
+            .Split(separators, StringSplitOptions.None)
             .Select(decimal.Parse)
             .ToArray()
             .Sum()
