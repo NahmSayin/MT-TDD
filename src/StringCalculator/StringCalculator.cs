@@ -9,6 +9,11 @@ public static class StringCalculator
             return "0";
         }
 
+        if (input.EndsWith(","))
+        {
+            return "Number expected but EOF found";
+        }
+
         return input
             .Split('\n', ',')
             .Select(decimal.Parse)
