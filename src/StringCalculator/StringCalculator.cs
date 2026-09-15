@@ -1,7 +1,9 @@
 namespace StringCalculator;
 
-public static class StringCalculator
+public class StringCalculator
 {
+    private static string customSeparatorIndicator = "//";
+
     public static string Add(string input)
     {
         if (input == "")
@@ -15,8 +17,9 @@ public static class StringCalculator
         }
 
         string[] separators = ["\n", ","];
-        
-        if (input.StartsWith("//"))
+
+
+        if (input.StartsWith(StringCalculator.customSeparatorIndicator))
         {
             string[] inputParts = input.Substring(2).Split('\n');
             separators = [inputParts[0]];
