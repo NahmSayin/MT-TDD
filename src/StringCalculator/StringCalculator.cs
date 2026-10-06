@@ -6,41 +6,57 @@ public class StringCalculator
 
     public static string Add(string input)
     {
-        if (input == "")
+        try
         {
-            return "0";
-        }
+            if (input == "")
+            {
+                return "0";
+            }
 
+            CheckInputDoesNotEndWithComma(input);
+
+            string[] separators = ["\n", ","];
+
+            if (input.StartsWith(StringCalculator.customSeparatorIndicator))
+            {
+                string[] inputParts = input.Substring(2).Split('\n');
+                separators = [inputParts[0]];
+                input = inputParts[1];
+            }
+
+            string[] strings = input
+                .Split(separators, StringSplitOptions.None);
+
+            CheckForInvalidSeparators(input, strings, separators);
+
+            IEnumerable<decimal> numbers = strings
+                .Select(decimal.Parse);
+
+            return numbers
+                .ToArray()
+                .Sum()
+                .ToString();
+        }
+        catch (Exception error)
+        {
+            return error.Message;
+        }
+    }
+
+    private static void CheckInputDoesNotEndWithComma(string input)
+    {
         if (input.EndsWith(","))
         {
-            return "Number expected but EOF found";
+            throw new Exception("Number expected but EOF found");
         }
+    }
 
-        string[] separators = ["\n", ","];
-
-
-        if (input.StartsWith(StringCalculator.customSeparatorIndicator))
-        {
-            string[] inputParts = input.Substring(2).Split('\n');
-            separators = [inputParts[0]];
-            input = inputParts[1];
-        }
-
-        string[] strings = input
-            .Split(separators, StringSplitOptions.None);
-
+    private static void CheckForInvalidSeparators(string input, string[] strings, string[] separators)
+    {
         if (Array.Exists(strings, element => element.Contains(",")))
         {
             int position = input.IndexOf(",");
-            return $"'{separators[0]}' expected but ',' found at position {position}.";
+            throw new Exception($"'{separators[0]}' expected but ',' found at position {position}.");
         }
-        
-        IEnumerable<decimal> numbers = strings
-            .Select(decimal.Parse);
-        
-        return numbers
-            .ToArray()
-            .Sum()
-            .ToString();
     }
 }
