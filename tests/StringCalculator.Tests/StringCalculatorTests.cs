@@ -5,9 +5,7 @@ public class StringCalculatorTests
     [Fact]
     public void Add_WithAnEmptyString_Returns0()
     {
-        var result = StringCalculator.Add("");
-
-        Assert.Equal("0", result);
+        Assert.Equal("0", StringCalculator.Add(""));
     }
     
     [Theory]
@@ -20,41 +18,37 @@ public class StringCalculatorTests
     [InlineData("1.1,2.2", "3.3")]
     public void Add_WithCommaSeparatedNumbers_ReturnsSumOfNumbers(string input, string expected)
     {
-        var result = StringCalculator.Add(input);
-
-        Assert.Equal(expected, result);
+        Assert.Equal(expected, StringCalculator.Add(input));
     }
     
     [Fact]
     public void Add_WithLineSeparatedNumbers_ReturnsSumOfNumbers()
     {
-        var result = StringCalculator.Add("2.2\n4.4");
-
-        Assert.Equal("6.6", result);
+        Assert.Equal("6.6", StringCalculator.Add("2.2\n4.4"));
     }
     
     [Fact]
     public void Add_WithLineAndCommaSeparatedNumbers_ReturnsSumOfNumbers()
     {
-        var result = StringCalculator.Add("1\n2,3");
-
-        Assert.Equal("6", result);
+        Assert.Equal("6", StringCalculator.Add("1\n2,3"));
     }
 
     [Fact]
     public void Add_DoesntAllowTheInputToEndInASeparator()
     {
-        var result = StringCalculator.Add("1,3,");
-
-        Assert.Equal("Number expected but EOF found", result);
+        Assert.Equal(
+            "Number expected but EOF found",
+            StringCalculator.Add("1,3,")
+        );
     }
 
         [Fact]
     public void Add_WithCustomSeparatorDoesntAllowInvalidSeparators()
     {
-        var result = StringCalculator.Add("//|\n1|2,3");
-
-        Assert.Equal("'|' expected but ',' found at position 3.", result);
+        Assert.Equal(
+            "'|' expected but ',' found at position 3.", 
+            StringCalculator.Add("//|\n1|2,3")
+        );
     }
     
     [Theory]
@@ -63,8 +57,14 @@ public class StringCalculatorTests
     [InlineData("//sep\n2sep3", "5")]
     public void Add_WithCustomSeparator_ReturnsSumOfNumbers(string input, string expected)
     {
-        var result = StringCalculator.Add(input);
-
-        Assert.Equal(expected, result);
+        Assert.Equal(expected, StringCalculator.Add(input));
+    }
+    
+    [Theory]
+    [InlineData("-1,2", "Negative not allowed : -1")]
+    // [InlineData("2,-4,-5", "Negative not allowed : -4, -5")]
+    public void Add_DoesNotAllowNegativeNumbers(string input, string expected)
+    {
+        Assert.Equal(expected, StringCalculator.Add(input));
     }
 }
