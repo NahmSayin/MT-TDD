@@ -26,9 +26,19 @@ public class StringCalculator
             input = inputParts[1];
         }
 
-        return input
-            .Split(separators, StringSplitOptions.None)
-            .Select(decimal.Parse)
+        string[] strings = input
+            .Split(separators, StringSplitOptions.None);
+
+        if (Array.Exists(strings, element => element.Contains(",")))
+        {
+            int position = input.IndexOf(",");
+            return $"'{separators[0]}' expected but ',' found at position {position}.";
+        }
+        
+        IEnumerable<decimal> numbers = strings
+            .Select(decimal.Parse);
+        
+        return numbers
             .ToArray()
             .Sum()
             .ToString();
