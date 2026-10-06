@@ -48,6 +48,14 @@ public class StringCalculatorTests
 
         Assert.Equal("Number expected but EOF found", result);
     }
+
+        [Fact]
+    public void Add_WithCustomSeparatorDoesntAllowInvalidSeparators()
+    {
+        var result = StringCalculator.Add("//|\n1|2,3");
+
+        Assert.Equal("'|' expected but ',' found at position 3.", result);
+    }
     
     [Theory]
     [InlineData("//;\n1;2", "3")]
@@ -60,7 +68,3 @@ public class StringCalculatorTests
         Assert.Equal(expected, result);
     }
 }
-
-
-
-// implement unit test theory https://pgpott.medium.com/theory-vs-fact-attribute-c-xunit-testing-9cd3c6bae76f
