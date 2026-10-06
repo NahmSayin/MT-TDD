@@ -17,12 +17,7 @@ public class StringCalculator
 
             string[] separators = ["\n", ","];
 
-            if (input.StartsWith(StringCalculator.customSeparatorIndicator))
-            {
-                string[] inputParts = input.Substring(2).Split('\n');
-                separators = [inputParts[0]];
-                input = inputParts[1];
-            }
+            (input, separators) = HandleCustomSeparators(input, separators);
 
             string[] strings = input
                 .Split(separators, StringSplitOptions.None);
@@ -41,6 +36,18 @@ public class StringCalculator
         {
             return error.Message;
         }
+    }
+
+    private static (string input, string[] separators) HandleCustomSeparators(string input, string[] separators)
+    {
+        if (input.StartsWith(StringCalculator.customSeparatorIndicator))
+        {
+            string[] inputParts = input.Substring(2).Split('\n');
+            separators = [inputParts[0]];
+            input = inputParts[1];
+        }
+
+        return (input, separators);
     }
 
     private static void CheckInputDoesNotEndWithComma(string input)
