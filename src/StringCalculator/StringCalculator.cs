@@ -24,10 +24,10 @@ public class StringCalculator
 
             CheckForInvalidSeparators(input, strings, separators);
 
-            CheckForNegativeNumbers(strings);
-
             IEnumerable<decimal> numbers = strings
                 .Select(decimal.Parse);
+
+            CheckForNegativeNumbers(numbers);
 
             return numbers
                 .ToArray()
@@ -69,11 +69,12 @@ public class StringCalculator
         }
     }
 
-    private static void CheckForNegativeNumbers(string[] strings)
+    private static void CheckForNegativeNumbers(IEnumerable<decimal> numbers)
     {
-        if (Array.Exists(strings, element => element.Contains("-")))
-        {
-            throw new Exception("Negative not allowed : -1");
+        var negativeNumbers = numbers.Where(n => n < 0).ToArray();
+        if (negativeNumbers.Length > 0)
+        { 
+            throw new Exception($"Negative not allowed : {string.Join(", ", negativeNumbers)}");
         }
     }
 }

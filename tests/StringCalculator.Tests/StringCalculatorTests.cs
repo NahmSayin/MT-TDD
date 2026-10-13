@@ -62,7 +62,7 @@ public class StringCalculatorTests
     
     [Theory]
     [InlineData("-1,2", "Negative not allowed : -1")]
-    // [InlineData("2,-4,-5", "Negative not allowed : -4, -5")]
+    [InlineData("2,-4,-5", "Negative not allowed : -4, -5")]
     public void Add_DoesNotAllowNegativeNumbers(string input, string expected)
     {
         Assert.Equal(expected, StringCalculator.Add(input));
