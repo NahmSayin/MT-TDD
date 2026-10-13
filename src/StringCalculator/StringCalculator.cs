@@ -12,7 +12,7 @@ public class StringCalculator
             {
                 return "0";
             }
-
+            
             CheckInputDoesNotEndWithComma(input);
 
             string[] separators = ["\n", ","];
@@ -71,7 +71,7 @@ public class StringCalculator
 
     private static void CheckForNegativeNumbers(IEnumerable<decimal> numbers)
     {
-        var negativeNumbers = numbers.Where(n => n < 0).ToArray();
+        decimal[] negativeNumbers = numbers.Where(n => n < 0).ToArray();
         if (negativeNumbers.Length > 0)
         { 
             throw new Exception($"Negative not allowed : {string.Join(", ", negativeNumbers)}");
