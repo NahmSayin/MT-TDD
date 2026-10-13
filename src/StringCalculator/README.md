@@ -55,7 +55,8 @@ Calling add with negative numbers will return the message "Negative not allowed 
 
 Calling add with multiple errors will return all error messages separated by newlines.
 
-"-1,,2" is invalid and return the message "Negative not allowed : -1\nNumber expected but ',' found at position 3." "-1,,-2" is invalid and return the message "Negative not allowed : -1\nNumber expected but ',' found at position 3.\nNegative not allowed : -2"
+- "-1,,2" is invalid and return the message "Negative not allowed : -1\nNumber expected but ',' found at position 3."
+- "-1,,-2" is invalid and return the message "Negative not allowed : -1\nNumber expected but ',' found at position 3.\nNegative not allowed : -2"
 
 ## Errors management
 
