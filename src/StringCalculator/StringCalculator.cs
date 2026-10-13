@@ -2,7 +2,7 @@ namespace StringCalculator;
 
 public class StringCalculator
 {
-    private static string customSeparatorIndicator = "//";
+    private static string _customSeparatorIndicator = "//";
 
     public static string Add(string input)
     {
@@ -12,8 +12,6 @@ public class StringCalculator
             {
                 return "0";
             }
-            
-            CheckInputDoesNotEndWithComma(input);
 
             string[] separators = ["\n", ","];
 
@@ -22,14 +20,9 @@ public class StringCalculator
             string[] strings = input
                 .Split(separators, StringSplitOptions.None);
 
-            CheckForInvalidSeparators(input, strings, separators);
+            ValidateInput(input, strings, separators);
 
-            IEnumerable<decimal> numbers = strings
-                .Select(decimal.Parse);
-
-            CheckForNegativeNumbers(numbers);
-
-            return numbers
+            return ConvertStringsToNumbers(strings)
                 .ToArray()
                 .Sum()
                 .ToString();
@@ -40,9 +33,53 @@ public class StringCalculator
         }
     }
 
+    private static void ValidateInput(string input, string[] strings, string[] separators)
+    {
+        string[] errors = [];
+
+        try
+        {
+            CheckInputDoesNotEndWithComma(input);
+        }
+        catch (Exception error)
+        {
+            errors.Append(error.Message);
+        }
+
+        try
+        {
+            CheckForInvalidSeparators(input, strings, separators);
+        }
+        catch (Exception error)
+        {
+            errors.Append(error.Message);
+        }
+
+        try
+        {
+            CheckForNegativeNumbers(strings);
+        }
+        catch (Exception error)
+        {
+            errors.Append(error.Message);
+        }
+
+        if (errors.Length > 0)
+        {
+            throw new Exception(string.Join("\n", errors));
+        }
+    }
+
+    private static IEnumerable<decimal> ConvertStringsToNumbers(string[] strings)
+    {
+        IEnumerable<decimal> numbers = strings
+            .Select(decimal.Parse);
+        return numbers;
+    }
+
     private static (string input, string[] separators) HandleCustomSeparators(string input, string[] separators)
     {
-        if (input.StartsWith(StringCalculator.customSeparatorIndicator))
+        if (input.StartsWith(StringCalculator._customSeparatorIndicator))
         {
             string[] inputParts = input.Substring(2).Split('\n');
             separators = [inputParts[0]];
@@ -69,11 +106,14 @@ public class StringCalculator
         }
     }
 
-    private static void CheckForNegativeNumbers(IEnumerable<decimal> numbers)
+    private static void CheckForNegativeNumbers(string[] strings)
     {
-        decimal[] negativeNumbers = numbers.Where(n => n < 0).ToArray();
+        // Todo: remove empty strings before converting to decimals
+        decimal[] negativeNumbers = ConvertStringsToNumbers(strings)
+            .Where(n => n < 0).ToArray();
+
         if (negativeNumbers.Length > 0)
-        { 
+        {
             throw new Exception($"Negative not allowed : {string.Join(", ", negativeNumbers)}");
         }
     }
