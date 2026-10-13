@@ -24,6 +24,8 @@ public class StringCalculator
 
             CheckForInvalidSeparators(input, strings, separators);
 
+            CheckForNegativeNumbers(strings);
+
             IEnumerable<decimal> numbers = strings
                 .Select(decimal.Parse);
 
@@ -64,6 +66,14 @@ public class StringCalculator
         {
             int position = input.IndexOf(",");
             throw new Exception($"'{separators[0]}' expected but ',' found at position {position}.");
+        }
+    }
+
+    private static void CheckForNegativeNumbers(string[] strings)
+    {
+        if (Array.Exists(strings, element => element.Contains("-")))
+        {
+            throw new Exception("Negative not allowed : -1");
         }
     }
 }
