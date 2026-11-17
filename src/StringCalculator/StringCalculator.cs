@@ -23,6 +23,7 @@ public class StringCalculator
                 .Split(separators, StringSplitOptions.None);
 
             CheckForInvalidSeparators(input, strings, separators);
+            CheckForAdjacentSeparators(input, strings, separators);
 
             IEnumerable<decimal> numbers = strings
                 .Select(decimal.Parse);
@@ -66,6 +67,15 @@ public class StringCalculator
         {
             int position = input.IndexOf(",");
             throw new Exception($"'{separators[0]}' expected but ',' found at position {position}.");
+        }
+    }
+
+    private static void CheckForAdjacentSeparators(string input, string[] strings, string[] separators)
+    {
+        if (Array.Exists(strings, element => element == ""))
+        {
+            int position = input.IndexOf(",") + 1;
+            throw new Exception($"Number expected but ',' found at position {position}.");
         }
     }
 
