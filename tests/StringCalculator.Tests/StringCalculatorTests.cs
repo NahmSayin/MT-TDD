@@ -70,6 +70,8 @@ public class StringCalculatorTests
     
     [Theory]
     [InlineData("1,,2", "Number expected but ',' found at position 2.")]
+    [InlineData("13,,2", "Number expected but ',' found at position 3.")]
+    [InlineData("//|13||2", "Number expected but ',' found at position 3.")]
     public void Add_DoesNotAllowAdjacentSeparators(string input, string expected)
     {
         Assert.Equal(expected, StringCalculator.Add(input));
