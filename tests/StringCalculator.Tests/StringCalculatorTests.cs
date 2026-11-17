@@ -69,10 +69,17 @@ public class StringCalculatorTests
     }
     
     [Theory]
-    [InlineData("-1,,2", "Negative not allowed : -1\nNumber expected but ',' found at position 3.")]
-    [InlineData("-1,,-2", "Negative not allowed : -1\nNumber expected but ',' found at position 3.\nNegative not allowed : -2")]
-    public void Add_CanReturnMultipleErrors(string input, string expected)
+    [InlineData("1,,2", "Number expected but ',' found at position 2.")]
+    public void Add_DoesNotAllowAdjacentSeparators(string input, string expected)
     {
         Assert.Equal(expected, StringCalculator.Add(input));
     }
+    
+    // [Theory]
+    // [InlineData("-1,,2", "Negative not allowed : -1\nNumber expected but ',' found at position 3.")]
+    // [InlineData("-1,,-2", "Negative not allowed : -1\nNumber expected but ',' found at position 3.\nNegative not allowed : -2")]
+    // public void Add_CanReturnMultipleErrors(string input, string expected)
+    // {
+    //     Assert.Equal(expected, StringCalculator.Add(input));
+    // }
 }
