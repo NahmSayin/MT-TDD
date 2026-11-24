@@ -74,8 +74,15 @@ public class StringCalculator
     {
         if (Array.Exists(strings, element => element == ""))
         {
-            int position = input.IndexOf(separators[0]) + 1;
-            throw new Exception($"Number expected but '{separators[0]}' found at position {position}.");
+            var separator = separators[0];
+            var indexOfSeparator = input.IndexOf(separator);
+            if (separators.Length > 1 && indexOfSeparator == -1)
+            {
+                separator = separators[1];
+                indexOfSeparator = input.IndexOf(separator);
+            }
+            int position = indexOfSeparator + 1;
+            throw new Exception($"Number expected but '{separator}' found at position {position}.");
         }
     }
 
