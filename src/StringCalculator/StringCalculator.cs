@@ -15,7 +15,7 @@ public class StringCalculator
             
             CheckInputDoesNotEndWithComma(input);
 
-            string[] separators = ["\n", ","];
+            string[] separators = [",", "\n"];
 
             (input, separators) = HandleCustomSeparators(input, separators);
 
@@ -74,8 +74,8 @@ public class StringCalculator
     {
         if (Array.Exists(strings, element => element == ""))
         {
-            int position = input.IndexOf(",") + 1;
-            throw new Exception($"Number expected but ',' found at position {position}.");
+            int position = input.IndexOf(separators[0]) + 1;
+            throw new Exception($"Number expected but '{separators[0]}' found at position {position}.");
         }
     }
 
